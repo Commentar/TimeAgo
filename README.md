@@ -1,7 +1,7 @@
 TimeAgo
 =
 
-[![Build Status](https://travis-ci.org/Commentar/TimeAgo.png?branch=master)](https://travis-ci.org/Commentar/TimeAgo) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Commentar/TimeAgo/badges/quality-score.png?s=de8f464b0b29483baecf1751883781e40840a621)](https://scrutinizer-ci.com/g/Commentar/TimeAgo/) [![Code Coverage](https://scrutinizer-ci.com/g/Commentar/TimeAgo/badges/coverage.png?s=c0b35e140c622cd80b88b8b9882ad228c253ae73)](https://scrutinizer-ci.com/g/Commentar/TimeAgo/) [![Latest Stable Version](https://poser.pugx.org/Commentar/time-ago/v/stable.png)](https://packagist.org/packages/Commentar/time-ago) [![Total Downloads](https://poser.pugx.org/Commentar/time-ago/downloads.png)](https://packagist.org/packages/Commentar/time-ago)
+[![Build Status](https://travis-ci.org/Commentar/TimeAgo.png?branch=master)](https://travis-ci.org/Commentar/TimeAgo) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Commentar/TimeAgo/badges/quality-score.png?s=e9a551f7f53423cdebc33dc530a6e89cb6ba58a1)](https://scrutinizer-ci.com/g/Commentar/TimeAgo/) [![Code Coverage](https://scrutinizer-ci.com/g/Commentar/TimeAgo/badges/coverage.png?s=822bbb46c79b752d4bfe94734c24ea4ca5da619f)](https://scrutinizer-ci.com/g/Commentar/TimeAgo/) [![Latest Stable Version](https://poser.pugx.org/Commentar/time-ago/v/stable.png)](https://packagist.org/packages/Commentar/time-ago) [![Total Downloads](https://poser.pugx.org/Commentar/time-ago/downloads.png)](https://packagist.org/packages/Commentar/time-ago)
 
 Date renderer for the [Commentar][commentar] project. This package calculates the time since a specific `DateTime` object en displays it in a human readable format.
 
