@@ -54,6 +54,36 @@ class TimeAgo
      */
     private function calculate()
     {
-        return '3 minutes ago';
+        $difference = (new \DateTime('now'))->getTimestamp() - $this->timestamp->getTimestamp();
+
+        if ($difference <= 1) {
+            return '1 second ago';
+        } elseif ($difference < 60) {
+            return $difference . ' seconds ago';
+        } elseif ($difference === 60) {
+            return '1 minute ago';
+        } elseif($difference < 3600) {
+            return floor($difference / 60). ' minutes ago';
+        } elseif($difference === 3600) {
+            return '1 hour ago';
+        } elseif($difference < 86400) {
+            return floor($difference / 60 / 60) . ' hours ago';
+        } elseif($difference === 86400) {
+            return 'yesterday';
+        } elseif($difference < 604800) {
+            return floor($difference / 60 / 60 / 24) . ' days ago';
+        } elseif($difference === 604800) {
+            return '1 week ago';
+        } elseif($difference < 2678400) {
+            return floor($difference / 60 / 60 / 24 / 7) . ' weeks ago';
+        } elseif($difference === 2678400) {
+            return '1 month ago';
+        } elseif($difference < 31536000) {
+            return floor($difference / 60 / 60 / 24 / 31) . ' months ago';
+        } elseif($difference === 31536000) {
+            return '1 year ago';
+        } else {
+            return floor($difference / 60 / 60 / 24 / 365) . ' years ago';
+        }
     }
 }
