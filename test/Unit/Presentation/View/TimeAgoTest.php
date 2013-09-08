@@ -12,7 +12,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
     public function testConstructCorrectAbstractInstance()
     {
         $view = new TimeAgo(
-            new \Commentar\Presentation\ThemeLoader('1970-01-01 00:00:00'),
+            new \Commentar\Presentation\ThemeLoader(),
             $this->getMock('\\Commentar\\ServiceBuilder\\Builder')
         );
 
@@ -25,7 +25,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
     public function testConstructCorrectInstance()
     {
         $view = new TimeAgo(
-            new \Commentar\Presentation\ThemeLoader('1970-01-01 00:00:00'),
+            new \Commentar\Presentation\ThemeLoader(),
             $this->getMock('\\Commentar\\ServiceBuilder\\Builder')
         );
 
@@ -49,7 +49,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($service));
 
         $view = new TimeAgo(
-            new \Commentar\Presentation\ThemeLoader('1970-01-01 00:00:00'),
+            new \Commentar\Presentation\ThemeLoader(),
             $factory,
             ['timestamp' => new \DateTime('1970-01-01 00:00:00')]
         );
