@@ -23,6 +23,18 @@ namespace Commentar\Date;
 class TimeAgo
 {
     /**
+     * @var array List of possible units to parse
+     */
+    private $units = [
+        60        => ['%s second ago', '%d seconds ago'],
+        3600      => ['%d minute ago', '%d minutes ago'],
+        86400     => ['%d hour ago',   '%d hours ago'],
+        604800    => ['yesterday',     '%d days ago'],
+        2678400   => ['%d week ago',   '%d weeks ago'],
+        31536000  => ['%d month ago',  '%d months ago'],
+    ];
+
+    /**
      * @var \DateTime Tmestamp object
      */
     private $timestamp;
@@ -42,9 +54,9 @@ class TimeAgo
      *
      * @return string The time since the timestamp
      */
-    public function getFormattedTimestamp()
+    public function getFormattedTimestamp($dump = false)
     {
-        return $this->calculate();
+        return $this->calculate($dump);
     }
 
     /**
@@ -52,38 +64,40 @@ class TimeAgo
      *
      * @return string The time since the timestamp
      */
-    private function calculate()
+    private function calculate($dump = false)
     {
         $difference = (new \DateTime('now'))->getTimestamp() - $this->timestamp->getTimestamp();
 
-        if ($difference <= 1) {
-            return '1 second ago';
-        } elseif ($difference < 60) {
-            return $difference . ' seconds ago';
-        } elseif ($difference === 60) {
-            return '1 minute ago';
-        } elseif ($difference < 3600) {
-            return floor($difference / 60). ' minutes ago';
-        } elseif ($difference === 3600) {
-            return '1 hour ago';
-        } elseif ($difference < 86400) {
-            return floor($difference / 60 / 60) . ' hours ago';
-        } elseif ($difference === 86400) {
-            return 'yesterday';
-        } elseif ($difference < 604800) {
-            return floor($difference / 60 / 60 / 24) . ' days ago';
-        } elseif ($difference === 604800) {
-            return '1 week ago';
-        } elseif ($difference < 2678400) {
-            return floor($difference / 60 / 60 / 24 / 7) . ' weeks ago';
-        } elseif ($difference === 2678400) {
-            return '1 month ago';
-        } elseif ($difference < 31536000) {
-            return floor($difference / 60 / 60 / 24 / 31) . ' months ago';
-        } elseif ($difference === 31536000) {
-            return '1 year ago';
+        $lastUnit = 1;
+
+        foreach ($this->units as $numeric => $texts) {
+            if ($difference < $numeric) {
+
+                $amount = (int) ceil($difference / $lastUnit);
+
+                return $this->renderTextualDate($amount, $texts);
+            }
+
+            $lastUnit = $numeric;
+        }
+
+        return $this->renderTextualDate((int) ceil($difference / $lastUnit), ['%d year ago', '%d years ago']);
+    }
+
+    /**
+     * Renders the textual date based on the unit texts and the amount
+     *
+     * @param int   $amount The amount of units
+     * @param array $texts  The textual representations of the units (singlular and plural)
+     *
+     * @return string The textual represenation of the date
+     */
+    private function renderTextualDate($amount, $texts)
+    {
+        if ($amount === 0 || $amount === 1) {
+            return sprintf($texts[0], 1);
         } else {
-            return floor($difference / 60 / 60 / 24 / 365) . ' years ago';
+            return sprintf($texts[1], $amount);
         }
     }
 }

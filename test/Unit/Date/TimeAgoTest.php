@@ -20,10 +20,27 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
+     */
+    public function testGetFormattedTimestampSingleSecondZeroDifference()
+    {
+        $timeAgo = new TimeAgo(new \DateTime('now'));
+
+        $this->assertSame('1 second ago', $timeAgo->getFormattedTimestamp(true));
+    }
+
+    /**
+     * @covers Commentar\Date\TimeAgo::__construct
+     * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
+     * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampSingleSecond()
     {
-        $timeAgo = new TimeAgo(new \DateTime('now'));
+        $target = new \DateTime('now');
+        $target->sub(new \DateInterval('PT1S'));
+
+        $timeAgo = new TimeAgo($target);
 
         $this->assertSame('1 second ago', $timeAgo->getFormattedTimestamp());
     }
@@ -32,6 +49,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampMultipleSeconds()
     {
@@ -40,13 +58,14 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
 
         $timeAgo = new TimeAgo($target);
 
-        $this->assertSame('30 seconds ago', $timeAgo->getFormattedTimestamp());
+        $this->assertSame('30 seconds ago', $timeAgo->getFormattedTimestamp(true));
     }
 
     /**
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampSingleMinute()
     {
@@ -62,6 +81,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampMultipleMinutes()
     {
@@ -77,6 +97,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampSingleHour()
     {
@@ -92,6 +113,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampMultipleHours()
     {
@@ -107,6 +129,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampSingleDay()
     {
@@ -122,6 +145,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampMultipleDays()
     {
@@ -137,6 +161,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampSingleWeek()
     {
@@ -152,6 +177,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampMultipleWeeks()
     {
@@ -167,6 +193,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampSingleMonth()
     {
@@ -182,6 +209,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampMultipleMonths()
     {
@@ -197,6 +225,7 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampSingleYear()
     {
@@ -212,11 +241,12 @@ class TimeAgoTest extends \PHPUnit_Framework_TestCase
      * @covers Commentar\Date\TimeAgo::__construct
      * @covers Commentar\Date\TimeAgo::getFormattedTimestamp
      * @covers Commentar\Date\TimeAgo::calculate
+     * @covers Commentar\Date\TimeAgo::renderTextualDate
      */
     public function testGetFormattedTimestampMultipleYears()
     {
         $target = new \DateTime('now');
-        $target->sub(new \DateInterval('P2Y'));
+        $target->sub(new \DateInterval('P22M'));
 
         $timeAgo = new TimeAgo($target);
 
